@@ -5,14 +5,21 @@
     <style>
       body {
         background: linear-gradient(to bottom, #fceabb, #f8b500);
-        font-family: Arial, sans-serif;
+        font-family: 'Baloo 2', cursive;
         text-align: center;
         color: #333;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
       }
       
       h1 {
         font-size: 48px;
         margin-top: 50px;
+        text-shadow: 2px 2px #f8e0e0;
       }
       
       p {
@@ -44,7 +51,36 @@
       button:hover {
         background-color: #b71c1c;
       }
+      
+      #game {
+        margin-top: 50px;
+        text-align: center;
+      }
+      
+      #game img {
+        margin: 10px;
+      }
+      
+      #game button {
+        font-size: 18px;
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 20px;
+        border-radius: 20px;
+        box-shadow: 2px 2px 10px #333;
+        cursor: pointer;
+      }
+      
+      #game button:hover {
+        background-color: #3e8e41;
+      }
     </style>
+    <link href="https://fonts.googleapis.com/css?family=Baloo+2&display=swap" rel="stylesheet">
   </head>
   <body>
     <h1>Welcome to Clara's Bunny Page</h1>
@@ -62,7 +98,6 @@
           "Rabbits are social animals and often live in groups.",
           "A group of wild rabbits is called a fluffle.",
           "Rabbits have a very keen sense of hearing and can even rotate their ears 180 degrees.",
-          "Domesticated rabbits can live up to 12 years.",
           "Rabbits are crepuscular, which means they are most active at dawn and dusk.",
           "A female rabbit is called a doe, and a male rabbit is called a buck.",
           "Rabbits can run up to 45 miles per hour."
