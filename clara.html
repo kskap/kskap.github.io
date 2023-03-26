@@ -3,21 +3,31 @@
   <head>
     <title>Welcome to Clara's Bunny Page</title>
     <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      
       body {
         background: linear-gradient(to bottom, #fceabb, #f8b500);
         font-family: 'Baloo 2', cursive;
         text-align: center;
         color: #333;
-        margin: 0;
-        padding: 0;
         display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
       }
       
       /* Styles for h1, p, img, button, and #game elements */
+      
+      #bunny {
+        position: relative;
+        bottom: 0;
+        width: 50px;
+        height: 50px;
+      }
       
     </style>
     <link href="https://fonts.googleapis.com/css?family=Baloo+2&display=swap" rel="stylesheet">
@@ -32,69 +42,86 @@
       <button onclick="location.reload(); getFact()">Refresh Bunny Picture and Fact</button>
     </div>
     <div id="game">
-      <p>Help the bunny collect as many carrots as possible!</p>
-      <img id="bunny" src="https://i.imgur.com/h5U0W8c.png" alt="cute bunny image">
-      <img id="carrot" src="https://i.imgur.com/pOvpN1W.png" alt="carrot image">
+      <p>Help the bunny avoid the obstacles!</p>
+      <div id="bunny"></div>
       <br>
-      <button onclick="moveBunny()">Start</button>
+      <button onclick="startGame()">Start</button>
     </div>
     <script>
+      const facts = [
+        "Baby rabbits are called kits.",
+        "Rabbits can jump up to 3 feet high.",
+        "Rabbits can see behind them without turning their heads.",
+        "Rabbits are very social animals and like to live in groups.",
+        "The average lifespan of a rabbit is 9-12 years.",
+        "Rabbits have nearly 360° panoramic vision.",
+        "Rabbits can run up to 35 miles per hour.",
+        "Rabbits have two sets of upper incisor teeth.",
+        "Rabbits have 28 teeth.",
+        "Rabbits are crepuscular, meaning they are most active at dawn and dusk.",
+        "A rabbit's teeth never stop growing.",
+        "Rabbits are herbivores.",
+        "A group of rabbits is called a colony.",
+        "Rabbits have excellent hearing and can even detect predators from underground.",
+        "A baby rabbit is called a kit, a cub, or a bunny.",
+        "Rabbits can see nearly 360 degrees without moving their heads.",
+        "Rabbits can communicate with each other using a variety of body positions and movements.",
+        "Rabbits are often used as a symbol of fertility and new life.",
+        "Rabbits have powerful hind legs that allow them to jump great distances.",
+        "Rabbits can purr when they are happy, similar to a cat's purr."
+      ];
+      
       function getFact() {
-        const facts = [
-          "Baby rabbits are called kits.",
-          "Rabbits have 28 teeth.",
-          "Rabbits can jump up to three times their own height.",
-          "Rabbits are social animals and often live in groups.",
-          "A group of wild rabbits is called a fluffle.",
-          "Rabbits have a very keen sense of hearing and can even rotate their ears 180 degrees.",
-          "Rabbits are crepuscular, which means they are most active at dawn and dusk.",
-          "A female rabbit is called a doe, and a male rabbit is called a buck.",
-          "Rabbits can run up to 45 miles per hour."
-        ];
-        const randomFact = facts[Math.floor(Math.random() * facts.length)];
-        document.getElementById("fact").innerHTML = randomFact;
+        document.getElementById("fact").innerHTML = facts[Math.floor(Math.random() * facts.length)];
       }
       
       getFact();
       
-      function moveBunny() {
+      function startGame() {
         const bunny = document.getElementById("bunny");
-        const carrot = document.getElementById("carrot");
         let bunnyPosition = 0;
-        let carrotPosition = 0;
+        let isGameOver = false;
         
-        document.addEventListener("keydown", (event) => {
-          if (event.code === "ArrowLeft") {
-            bunnyPosition -= 10;
-            bunny.style.left = bunnyPosition + "px";
-          } else if (event.code === "ArrowRight") {
-            bunnyPosition += 10;
-            bunny.style.left = bunnyPosition + "px";
-          } else if (event.code === "ArrowUp") {
-            carrotPosition -= 10;
-            carrot.style.top = carrotPosition + "px";
-            if (isCollision(bunny, carrot)) {
-              alert("Carrot collected!");
-              carrotPosition = 0;
-              carrot.style.top = carrotPosition + "px";
-            }
-          }
+	document.addEventListener("keydown", (event) => {
+	  if (event.code === "ArrowLeft" && bunnyPosition > -200) bunnyPosition -= 10;
+	  else if (event.code === "ArrowRight" && bunnyPosition < 200) bunnyPosition += 10;
+	  bunny.style.left = bunnyPosition + "px";
+	});
+        
+        obstacles.forEach((obstacle) => {
+          const obstacleElement = document.createElement("div");
+          obstacleElement.classList.add("obstacle");
+          obstacleElement.style.top = obstacle.top + "px";
+          obstacleElement.style.left = obstacle.left + "px";
+          document.body.appendChild(obstacleElement);
         });
         
-        function isCollision(bunny, carrot) {
-          const bunnyRect = bunny.getBoundingClientRect();
-          const carrotRect = carrot.getBoundingClientRect();
-          
-          return !(
-            bunnyRect.bottom < carrotRect.top ||
-            bunnyRect.top > carrotRect.bottom ||
-            bunnyRect.right < carrotRect.left ||
-            bunnyRect.left > carrotRect.right
-          );
-        }
+        setInterval(() => {
+          const obstacles = document.querySelectorAll(".obstacle");
+          obstacles.forEach((obstacle) => {
+            obstacle.style.left = obstacle.offsetLeft - 5 + "px";
+            if (isCollision(bunny, obstacle)) {
+              isGameOver = true;
+              alert("Game over!");
+              location.reload();
+            }
+          });
+          if (!isGameOver) window.requestAnimationFrame(startGame);
+        }, 1000 / 60);
+      }
+      
+      function isCollision(bunny, obstacle) {
+        const bunnyRect = bunny.getBoundingClientRect();
+        const obstacleRect = obstacle.getBoundingClientRect();
+        
+        return !(
+          bunnyRect.bottom < obstacleRect.top ||
+          bunnyRect.top > obstacleRect.bottom ||
+          bunnyRect.right < obstacleRect.left ||
+          bunnyRect.left > obstacleRect.right
+        );
       }
     </script>
   </body>
 </html>
-
 
