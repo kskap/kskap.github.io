@@ -78,49 +78,57 @@
       getFact();
       
       function startGame() {
-        const bunny = document.getElementById("bunny");
-        let bunnyPosition = 0;
-        let isGameOver = false;
-        
-	document.addEventListener("keydown", (event) => {
-	  if (event.code === "ArrowLeft" && bunnyPosition > -200) bunnyPosition -= 10;
-	  else if (event.code === "ArrowRight" && bunnyPosition < 200) bunnyPosition += 10;
-	  bunny.style.left = bunnyPosition + "px";
-	});
-        
-        obstacles.forEach((obstacle) => {
-          const obstacleElement = document.createElement("div");
-          obstacleElement.classList.add("obstacle");
-          obstacleElement.style.top = obstacle.top + "px";
-          obstacleElement.style.left = obstacle.left + "px";
-          document.body.appendChild(obstacleElement);
-        });
-        
-        setInterval(() => {
-          const obstacles = document.querySelectorAll(".obstacle");
-          obstacles.forEach((obstacle) => {
-            obstacle.style.left = obstacle.offsetLeft - 5 + "px";
-            if (isCollision(bunny, obstacle)) {
-              isGameOver = true;
-              alert("Game over!");
-              location.reload();
-            }
-          });
-          if (!isGameOver) window.requestAnimationFrame(startGame);
-        }, 1000 / 60);
-      }
-      
-      function isCollision(bunny, obstacle) {
-        const bunnyRect = bunny.getBoundingClientRect();
-        const obstacleRect = obstacle.getBoundingClientRect();
-        
-        return !(
-          bunnyRect.bottom < obstacleRect.top ||
-          bunnyRect.top > obstacleRect.bottom ||
-          bunnyRect.right < obstacleRect.left ||
-          bunnyRect.left > obstacleRect.right
-        );
-      }
+    const bunny = document.getElementById("bunny");
+    let bunnyPosition = 0;
+    let isGameOver = false;
+
+    document.addEventListener("keydown", (event) => {
+      if (event.code === "ArrowLeft" && bunnyPosition > -200) bunnyPosition -= 10;
+      else if (event.code === "ArrowRight" && bunnyPosition < 200) bunnyPosition += 10;
+      bunny.style.left = bunnyPosition + "px";
+    });
+
+    const obstacles = [
+      { top: 100, left: 700 },
+      { top: 200, left: 1000 },
+      { top: 300, left: 400 },
+      { top: 400, left: 800 },
+      { top: 500, left: 600 },
+    ];
+
+    obstacles.forEach((obstacle) => {
+      const obstacleElement = document.createElement("div");
+      obstacleElement.classList.add("obstacle");
+      obstacleElement.style.top = obstacle.top + "px";
+      obstacleElement.style.left = obstacle.left + "px";
+      document.body.appendChild(obstacleElement);
+    });
+
+    setInterval(() => {
+      const obstacles = document.querySelectorAll(".obstacle");
+      obstacles.forEach((obstacle) => {
+        obstacle.style.left = obstacle.offsetLeft - 5 + "px";
+        if (isCollision(bunny, obstacle)) {
+          isGameOver = true;
+          alert("Game over!");
+          location.reload();
+        }
+      });
+      if (!isGameOver) window.requestAnimationFrame(startGame);
+    }, 1000 / 60);
+  }
+
+  function isCollision(bunny, obstacle) {
+    const bunnyRect = bunny.getBoundingClientRect();
+    const obstacleRect = obstacle.getBoundingClientRect();
+
+    return !(
+      bunnyRect.bottom < obstacleRect.top ||
+      bunnyRect.top > obstacleRect.bottom ||
+      bunnyRect.right < obstacleRect.left ||
+      bunnyRect.left > obstacleRect.right
+    );
+  }
     </script>
   </body>
 </html>
