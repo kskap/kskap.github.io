@@ -4,9 +4,12 @@
     <title>Welcome to Clara's Bunny Page</title>
     <style>
       body {
-        background-color: #f8e0e0;
+        background-image: url('https://cdn.pixabay.com/photo/2016/04/15/08/04/pattern-1332129_960_720.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
         font-family: Arial, sans-serif;
         text-align: center;
+        color: #fff;
       }
       
       h1 {
@@ -49,7 +52,27 @@
     <h1>Welcome to Clara's Bunny Page</h1>
     <p>Here's an adorable baby bunny for you:</p>
     <img src="https://source.unsplash.com/300x300/?bunny" alt="cute baby bunny picture">
+    <p id="fact"></p>
     <p>Thank you for visiting our website! Come back soon for more cute bunny pictures.</p>
-    <button onclick="location.reload()">Refresh Bunny Picture</button>
+    <button onclick="location.reload(); getFact()">Refresh Bunny Picture and Fact</button>
+    <script>
+      function getFact() {
+        const facts = [
+          "Baby rabbits are called kits.",
+          "Rabbits have 28 teeth.",
+          "Rabbits can jump up to three times their own height.",
+          "Rabbits are social animals and often live in groups.",
+          "A group of wild rabbits is called a fluffle.",
+          "Rabbits have a very keen sense of hearing and can even rotate their ears 180 degrees.",
+          "Domesticated rabbits can live up to 12 years.",
+          "Rabbits are crepuscular, which means they are most active at dawn and dusk.",
+          "A female rabbit is called a doe, and a male rabbit is called a buck.",
+          "Rabbits can run up to 45 miles per hour."
+        ];
+        const randomFact = facts[Math.floor(Math.random() * facts.length)];
+        document.getElementById("fact").innerHTML = randomFact;
+      }
+      getFact();
+    </script>
   </body>
 </html>
