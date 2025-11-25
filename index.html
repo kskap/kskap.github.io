@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Kevin Skapinetz – venture capital, cybersecurity, and strategic advisory." />
 
+  <!-- Added Roboto font -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --bg: #f5eee9;
@@ -71,11 +74,13 @@
       font-weight: 600;
     }
 
+    /* Updated to use Roboto */
     h1 {
-      font-family: "Georgia", "Times New Roman", serif;
+      font-family: "Roboto", sans-serif;
       font-size: 2.8rem;
       margin: 0 0 0.75rem;
       line-height: 1.1;
+      font-weight: 700;
     }
 
     .title-line {
@@ -147,16 +152,6 @@
       margin-bottom: 2rem;
     }
 
-    .email-link {
-      color: var(--link);
-      text-decoration: none;
-      border-bottom: 1px dotted rgba(36, 87, 116, 0.5);
-    }
-
-    .email-link:hover {
-      border-bottom-style: solid;
-    }
-
     .photo-side {
       position: relative;
       display: flex;
@@ -202,46 +197,7 @@
       background: #52d19c;
     }
 
-    .strip-photos {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.75rem;
-      font-size: 0.7rem;
-      color: var(--muted);
-    }
-
-    .strip-photos figure {
-      margin: 0;
-      border-radius: 9px;
-      overflow: hidden;
-      background: #111;
-      position: relative;
-    }
-
-    .strip-photos img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      filter: saturate(1.05);
-    }
-
-    .strip-photos figcaption {
-      position: absolute;
-      left: 0.7rem;
-      bottom: 0.55rem;
-      color: #f7f7f7;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
-      font-size: 0.7rem;
-      letter-spacing: 0.02em;
-    }
-
-    footer {
-      text-align: center;
-      font-size: 0.75rem;
-      color: var(--muted);
-      padding: 0 1.5rem 1.5rem;
-    }
+    /* Removed strip photos section */
   </style>
 </head>
 <body>
@@ -276,7 +232,6 @@
         </div>
 
         <div class="cta-row">
-          <!-- TODO: replace the LinkedIn URL with your actual profile link -->
           <a
             class="primary-link"
             href="https://www.linkedin.com/"
@@ -286,13 +241,6 @@
             View my LinkedIn profile
             <span class="icon">↗</span>
           </a>
-
-          <span class="muted-note">
-            Or email me at
-            <a class="email-link" href="mailto:kevin@skapinetz.com">
-              kevin@skapinetz.com
-            </a>
-          </span>
         </div>
 
         <div class="muted-note">
@@ -310,22 +258,7 @@
           </div>
         </div>
 
-        <div class="strip-photos">
-          <figure>
-            <img
-              src="kevin-ibm-stage.jpg"
-              alt="Kevin speaking on a large conference stage"
-            />
-            <figcaption>Conference keynote</figcaption>
-          </figure>
-          <figure>
-            <img
-              src="kevin-think-stage.jpg"
-              alt="Kevin presenting on stage"
-            />
-            <figcaption>Security &amp; AI</figcaption>
-          </figure>
-        </div>
+        <!-- Removed the strip photos entirely -->
       </aside>
     </main>
   </div>
@@ -335,7 +268,6 @@
   </footer>
 
   <script>
-    // Tiny enhancement: keep the footer year current
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
