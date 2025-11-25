@@ -1,24 +1,342 @@
-<!DOCTYPE html>
-<html>
-<style>
-body {
-    background-color: #76b2f6;
-}
-</style>
-	<body>
-		<h1>Welcome to Skapinetz.com!!!</h1>
-    </br>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Kevin Skapinetz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Kevin Skapinetz – venture capital, cybersecurity, and strategic advisory." />
 
-    <p><b>Hello! Welcome to www.skapinetz.com. This is a website where my family
-      and I create fun and exiting adventures with you! If you are intrested to
-      create cupcakes, cakes, and other sweet treats:</b></p>
-    <a href="/thePureBaker.html">Click here to get to Lyla's page.</a>
-    <p><b>If you are intrested in all out MINECRAFT, games, roblox, and more:</b></p>
-    <a href="/milena.html">Click here to get to Milena's page.</a>
-    <p><b>Lastly! If you are intrested in cute, cudely bunny photos:</b></p>
-    <a href="/clara.html">Click here to get to Clara's page.</a>
-    <p><b>My family and are so thankful for your visit to www.skapinetz.com
-      We really appreciate it! Have an amazing day!
-      -Lyla, Milena, & Clara</b></p>
-	</body>
+  <style>
+    :root {
+      --bg: #f5eee9;
+      --card: #ffffff;
+      --accent: #c46a4a;
+      --text: #2b2b2b;
+      --muted: #6f6f6f;
+      --border: #e4d8ce;
+      --link: #245574;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.5rem;
+    }
+
+    .card {
+      background: var(--card);
+      max-width: 1100px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+      gap: 3rem;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.08);
+      border-radius: 12px;
+      padding: 3rem 3.5rem;
+    }
+
+    @media (max-width: 880px) {
+      .page {
+        padding: 1.5rem 1rem;
+      }
+
+      .card {
+        grid-template-columns: 1fr;
+        padding: 2rem 1.75rem 2.5rem;
+      }
+    }
+
+    .intro-label {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.75rem;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+
+    h1 {
+      font-family: "Georgia", "Times New Roman", serif;
+      font-size: 2.8rem;
+      margin: 0 0 0.75rem;
+      line-height: 1.1;
+    }
+
+    .title-line {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 1.75rem;
+    }
+
+    .body-copy {
+      font-size: 0.98rem;
+      color: #444;
+      margin-bottom: 2rem;
+    }
+
+    .body-copy p {
+      margin: 0 0 0.8rem;
+    }
+
+    .body-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .primary-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.65rem 1.4rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #f8f3ee;
+      font-size: 0.9rem;
+      text-decoration: none;
+      color: var(--link);
+      font-weight: 500;
+      transition: background 0.2s ease, border-color 0.2s ease,
+        transform 0.1s ease;
+    }
+
+    .primary-link span.icon {
+      margin-left: 0.4rem;
+      font-size: 1.1rem;
+    }
+
+    .primary-link:hover {
+      background: #f0e3d7;
+      border-color: #d5c5b7;
+      transform: translateY(-1px);
+    }
+
+    .muted-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .advisory-note {
+      font-size: 0.85rem;
+      color: #555;
+      border-left: 3px solid var(--border);
+      padding-left: 0.85rem;
+      margin-bottom: 2rem;
+    }
+
+    .email-link {
+      color: var(--link);
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(36, 87, 116, 0.5);
+    }
+
+    .email-link:hover {
+      border-bottom-style: solid;
+    }
+
+    .photo-side {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .hero-photo {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 10px;
+      background: #111;
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .badge {
+      position: absolute;
+      left: 1rem;
+      bottom: 1rem;
+      background: rgba(12, 24, 43, 0.88);
+      color: #f2f2f2;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #52d19c;
+    }
+
+    .strip-photos {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    .strip-photos figure {
+      margin: 0;
+      border-radius: 9px;
+      overflow: hidden;
+      background: #111;
+      position: relative;
+    }
+
+    .strip-photos img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.05);
+    }
+
+    .strip-photos figcaption {
+      position: absolute;
+      left: 0.7rem;
+      bottom: 0.55rem;
+      color: #f7f7f7;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+      font-size: 0.7rem;
+      letter-spacing: 0.02em;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+      padding: 0 1.5rem 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <main class="card" aria-label="Kevin Skapinetz profile">
+      <section>
+        <div class="intro-label">My name is</div>
+        <h1>Kevin Skapinetz</h1>
+        <div class="title-line">
+          Venture capital · cybersecurity · strategic advisor
+        </div>
+
+        <div class="body-copy">
+          <p>
+            I work with founders and leadership teams at the intersection of
+            security, infrastructure, and enterprise software — helping them
+            turn complex cybersecurity problems into clear product and go-to-market
+            decisions.
+          </p>
+          <p>
+            Today I invest as a general partner in early-stage technology
+            companies and selectively advise teams on security strategy,
+            positioning, and executive communication. Previously, I spent years
+            building and leading security offerings and speaking on stages around
+            the world.
+          </p>
+        </div>
+
+        <div class="advisory-note">
+          For occasional advisory and board work, I focus on security-first
+          companies where I can be directly helpful to the founders.
+        </div>
+
+        <div class="cta-row">
+          <!-- TODO: replace the LinkedIn URL with your actual profile link -->
+          <a
+            class="primary-link"
+            href="https://www.linkedin.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View my LinkedIn profile
+            <span class="icon">↗</span>
+          </a>
+
+          <span class="muted-note">
+            Or email me at
+            <a class="email-link" href="mailto:kevin@skapinetz.com">
+              kevin@skapinetz.com
+            </a>
+          </span>
+        </div>
+
+        <div class="muted-note">
+          This site reflects independent work and advisory interests and does
+          not represent the views of any current or prior employer.
+        </div>
+      </section>
+
+      <aside class="photo-side" aria-label="Kevin speaking and media">
+        <div class="hero-photo">
+          <img src="img/kevin-portrait.jpg" alt="Kevin Skapinetz in studio" />
+          <div class="badge">
+            <span class="badge-dot"></span>
+            Cybersecurity &amp; venture
+          </div>
+        </div>
+
+        <div class="strip-photos">
+          <figure>
+            <img
+              src="img/kevin-ibm-stage.jpg"
+              alt="Kevin speaking on a large conference stage"
+            />
+            <figcaption>Conference keynote</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="img/kevin-think-stage.jpg"
+              alt="Kevin presenting on stage"
+            />
+            <figcaption>Security &amp; AI</figcaption>
+          </figure>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <footer>
+    &copy; <span id="year"></span> Kevin Skapinetz. All rights reserved.
+  </footer>
+
+  <script>
+    // Tiny enhancement: keep the footer year current
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>
